@@ -8,3 +8,4 @@
 - Instalar a Webpack globalmente `npm i -g webpack@5.68.0`
 - Instalar Tokens e Cookies `npm i jsonwebtoken@8.5.1 cookie-parser@1.4.6`
 - Instalar NextJS e React `npm i next@12.0.7 react@17.0.2 react-dom@17.0.2`
+- Instalar Iron-Sessions `npm i iron-session@6.0.5`
