@@ -1,3 +1,4 @@
+import { useState } from "react"
 import styled from "styled-components"
 import Link from "next/link"
 
@@ -24,6 +25,25 @@ text-align: center;
 `
 
 export default function SignupPage() {
+
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [user, setUser] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const hanldeForm = (event) => {
+        event.preventDefault() // ? faz com que o formulario nao atualize a pagina
+
+        console.log({
+            firstName,
+            lastName,
+            user,
+            email,
+            password
+        })
+    }
+
     return (
         <ImageWithSpace>
             <H1># Social Dev</H1>
@@ -32,14 +52,14 @@ export default function SignupPage() {
             <FormContainer>
                 <H2>Crie sua conta</H2>
 
-                <Form>
-                    <Input type="text" label="Nome" />
-                    <Input type="text" label="Sobrenome" />
-                    <Input type="text" label="Usuário" />
-                    <Input type="email" label="Email" />
-                    <Input type="password" label="Senha" />
+                <Form onSubmit={hanldeForm}>
+                    <Input type="text" label="Nome" onChange={({ target }) => { setFirstName(target.value) }} />
+                    <Input type="text" label="Sobrenome" onChange={({ target }) => { setLastName(target.value) }} />
+                    <Input type="text" label="Usuário" onChange={({ target }) => { setUser(target.value) }} />
+                    <Input type="email" label="Email" onChange={({ target }) => { setEmail(target.value) }} />
+                    <Input type="password" label="Senha" onChange={({ target }) => { setPassword(target.value) }} />
 
-                    <Button>Entrar</Button>
+                    <Button>Cadastrar</Button>
                 </Form>
 
                 <Text>

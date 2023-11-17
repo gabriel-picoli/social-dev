@@ -19,15 +19,15 @@ const ContainerText = styled.div`
 `
 
 function Post() {
-    return (
-        <PostContainer>
-            <StyledUsername>@username</StyledUsername>
-            <StyledDate>24 de maio de 2021</StyledDate>
-            <ContainerText>
-                as vezes eu sinto saudade sua, estou maluco e não sei o que fazer a respeito
-            </ContainerText>
-        </PostContainer>
-    )
+  return (
+    <PostContainer>
+      <StyledUsername>@username</StyledUsername>
+      <StyledDate>24 de maio de 2021</StyledDate>
+      <ContainerText>
+        restos de um moinho que caiu sao como restos de um amor. as ruinas ficam e quando voce olha para elas, lembra da beleza que antes havia ali.. e voce quer de volta
+      </ContainerText>
+    </PostContainer>
+  )
 }
 
 export default Post
