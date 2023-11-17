@@ -2,6 +2,11 @@ import { useState } from "react"
 import styled from "styled-components"
 import Link from "next/link"
 
+import { useForm } from "react-hook-form"
+import { joiResolver } from "@hookform/resolvers/joi"
+
+import { signupSchema } from "../modules/user/user.schema"
+
 import ImageWithSpace from "../src/components/layout/ImageWithSpace"
 import H1 from "../src/components/typography/H1"
 import H2 from "../src/components/typography/H2"
@@ -26,22 +31,22 @@ text-align: center;
 
 export default function SignupPage() {
 
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: joiResolver(signupSchema)
+    })
+
+    console.log(errors)
+
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [user, setUser] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const hanldeForm = (event) => {
-        event.preventDefault() // ? faz com que o formulario nao atualize a pagina
+    const hanldeForm = (data) => {
 
-        console.log({
-            firstName,
-            lastName,
-            user,
-            email,
-            password
-        })
+        console.log(data)
+
     }
 
     return (
@@ -52,14 +57,14 @@ export default function SignupPage() {
             <FormContainer>
                 <H2>Crie sua conta</H2>
 
-                <Form onSubmit={hanldeForm}>
-                    <Input type="text" label="Nome" onChange={({ target }) => { setFirstName(target.value) }} />
-                    <Input type="text" label="Sobrenome" onChange={({ target }) => { setLastName(target.value) }} />
-                    <Input type="text" label="Usuário" onChange={({ target }) => { setUser(target.value) }} />
-                    <Input type="email" label="Email" onChange={({ target }) => { setEmail(target.value) }} />
-                    <Input type="password" label="Senha" onChange={({ target }) => { setPassword(target.value) }} />
+                <Form onSubmit={handleSubmit(hanldeForm)}>
+                    <Input type="text" label="Nome" {...register('firstName')} />
+                    <Input type="text" label="Sobrenome" {...register('lastName')} />
+                    <Input type="text" label="Usuário" {...register('user')} />
+                    <Input type="email" label="Email" {...register('email')} />
+                    <Input type="password" label="Senha" {...register('password')} />
 
-                    <Button>Cadastrar</Button>
+                    <Button type="submit">Cadastrar</Button>
                 </Form>
 
                 <Text>
