@@ -35,8 +35,6 @@ export default function SignupPage() {
         resolver: joiResolver(signupSchema)
     })
 
-    console.log(errors)
-
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [user, setUser] = useState('')
@@ -58,13 +56,13 @@ export default function SignupPage() {
                 <H2>Crie sua conta</H2>
 
                 <Form onSubmit={handleSubmit(hanldeForm)}>
-                    <Input type="text" label="Nome" {...register('firstName')} />
-                    <Input type="text" label="Sobrenome" {...register('lastName')} />
-                    <Input type="text" label="Usuário" {...register('user')} />
-                    <Input type="email" label="Email" {...register('email')} />
-                    <Input type="password" label="Senha" {...register('password')} />
+                    <Input type="text" label="Nome" {...register('firstName')} error={errors.firstName} />
+                    <Input type="text" label="Sobrenome" {...register('lastName')} error={errors.lastName} />
+                    <Input type="text" label="Usuário" {...register('user')} error={errors.user} />
+                    <Input type="email" label="Email" {...register('email')} error={errors.email} />
+                    <Input type="password" label="Senha" {...register('password')} error={errors.password} />
 
-                    <Button type="submit">Cadastrar</Button>
+                    <Button type="submit" disabled={Object.keys(errors).length}>Cadastrar</Button>
                 </Form>
 
                 <Text>
