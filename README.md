@@ -10,3 +10,4 @@
 - Instalar NextJS e React `npm i next@12.0.7 react@17.0.2 react-dom@17.0.2`
 - Instalar Iron-Sessions `npm i iron-session@6.0.5`
 - Instalar Hook Form `npm i react-hook-form@7.27.1 @hookform/resolvers@2.8.8`
+- Instalar Axios `npm i axios@0.26.0`
