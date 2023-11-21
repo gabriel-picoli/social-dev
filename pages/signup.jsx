@@ -30,8 +30,7 @@ text-align: center;
 `
 
 export default function SignupPage() {
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: joiResolver(signupSchema)
     })
 
@@ -56,11 +55,11 @@ export default function SignupPage() {
                 <H2>Crie sua conta</H2>
 
                 <Form onSubmit={handleSubmit(hanldeForm)}>
-                    <Input type="text" label="Nome" {...register('firstName')} error={errors.firstName} />
-                    <Input type="text" label="Sobrenome" {...register('lastName')} error={errors.lastName} />
-                    <Input type="text" label="Usuário" {...register('user')} error={errors.user} />
-                    <Input type="email" label="Email" {...register('email')} error={errors.email} />
-                    <Input type="password" label="Senha" {...register('password')} error={errors.password} />
+                    <Input type="text" label="Nome" name="firstName" control={control} />
+                    <Input type="text" label="Sobrenome" name="lastName" control={control} />
+                    <Input type="text" label="Usuário" name="user" control={control} />
+                    <Input type="email" label="Email" name="email" control={control} />
+                    <Input type="password" label="Senha" name="password" control={control} />
 
                     <Button type="submit" disabled={Object.keys(errors).length}>Cadastrar</Button>
                 </Form>
