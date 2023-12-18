@@ -1,4 +1,4 @@
-# Styled Components
+# Comandos
 
 - Instalar Stlyed Components `npm i styled-components@5.3.3`
 - Instalar Babel `npm i babel-plugin-styled-components@2.0.6 --save-dev`
