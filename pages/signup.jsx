@@ -1,10 +1,9 @@
-import { useState } from "react"
 import styled from "styled-components"
 import Link from "next/link"
 
 import { useForm } from "react-hook-form"
 import { joiResolver } from "@hookform/resolvers/joi"
-import { Axios } from "axios"
+import axios from 'axios'
 import { useRouter } from "next/router"
 
 import { signupSchema } from "../modules/user/user.schema"
@@ -39,18 +38,22 @@ export default function SignupPage() {
 
     const hanldeForm = async (data) => {
         try {
-            const { status } = await Axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/signup`, data)
+            const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/signup`, data)
+            console.error(err)
             if (status === 201) {
                 router.push('/')
             }
+
+            console.error(err)
+
         } catch (err) {
+            console.log(err)
             if (err.response.data.code === 11000) {
                 setError(err.response.data.duplicatedKey, {
                     type: 'duplicated'
                 })
             }
         }
-
     }
 
     return (
