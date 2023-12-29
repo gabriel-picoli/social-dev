@@ -1,5 +1,11 @@
 import styled from "styled-components"
 import Link from "next/link"
+import { useForm } from "react-hook-form"
+import { joiResolver } from '@hookform/resolvers/joi'
+import axios from 'axios'
+import { useRouter } from "next/router"
+
+import { loginSchema } from "../modules/user/user.schema"
 
 import ImageWithSpace from "../src/components/layout/ImageWithSpace"
 import H1 from "../src/components/typography/H1"
@@ -24,6 +30,32 @@ text-align: center;
 `
 
 export default function LoginPage() {
+    const router = useRouter()
+    const { control, handleSubmit, formState: { errors }, setError } = useForm({
+        resolver: joiResolver(loginSchema)
+    })
+
+    const handleForm = async (data) => {
+        try {
+            const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, data)
+            if (status === 200) {
+                router.push('/')
+            }
+        } catch ({ response }) {
+            if (response.data === 'incorrect password') {
+                setError('password', {
+                    message: 'Senha incorreta.'
+                })
+            } else if (response.data === 'not found') {
+                setError('userOrEmail', {
+                    message: 'Usuário ou email incorretos.'
+                })
+            }
+        }
+
+    }
+
+
     return (
         <ImageWithSpace>
             <H1># Social Dev</H1>
@@ -32,11 +64,11 @@ export default function LoginPage() {
             <FormContainer>
                 <H2>Entre em sua conta</H2>
 
-                <Form>
-                    <Input type="text" label="Email ou usuário" />
-                    <Input type="password" label="Senha" />
+                <Form onSubmit={handleSubmit(handleForm)}>
+                    <Input type="text" label="Email ou usuário" name="userOrEmail" control={control} />
+                    <Input type="password" label="Senha" name="password" control={control} />
 
-                    <Button>Entrar</Button>
+                    <Button type="submit" disabled={Object.keys(errors).length}>Entrar</Button>
                 </Form>
 
                 <Text>
