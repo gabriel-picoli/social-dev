@@ -36,18 +36,13 @@ export default function SignupPage() {
         resolver: joiResolver(signupSchema)
     })
 
-    const hanldeForm = async (data) => {
+    const handleForm = async (data) => {
         try {
             const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/signup`, data)
-            console.error(err)
             if (status === 201) {
                 router.push('/')
             }
-
-            console.error(err)
-
         } catch (err) {
-            console.log(err)
             if (err.response.data.code === 11000) {
                 setError(err.response.data.duplicatedKey, {
                     type: 'duplicated'
@@ -64,7 +59,7 @@ export default function SignupPage() {
             <FormContainer>
                 <H2>Crie sua conta</H2>
 
-                <Form onSubmit={handleSubmit(hanldeForm)}>
+                <Form onSubmit={handleSubmit(handleForm)}>
                     <Input type="text" label="Nome" name="firstName" control={control} />
                     <Input type="text" label="Sobrenome" name="lastName" control={control} />
                     <Input type="text" label="Usuário" name="user" control={control} />

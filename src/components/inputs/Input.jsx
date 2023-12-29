@@ -1,6 +1,5 @@
-import { useController } from "react-hook-form";
-
 import styled from "styled-components";
+import { useController } from "react-hook-form";
 
 const InputContainer = styled.div`
   width: 100%;
@@ -38,7 +37,7 @@ const ErrorLabel = styled.span`
 const errorMessage = {
   'string.empty': 'Este campo é obrigatório.',
   'string.email': 'Digite um email válido.',
-  'duplicated': 'Já existe uma conta registrada com esses dados.'
+  'duplicated': 'Já existe um usuário cadastrado com esses dados.'
 }
 
 const Input = ({ label, name, control, defaultValue = '', ...props }) => {
