@@ -35,23 +35,23 @@ const BottomText = styled.p`
   flex: 1;
 `
 
-function CreatePost() {
-    return (
-        <PostContainer>
-            <H4><Title>No que você está pensando?, @username</Title></H4>
+function CreatePost({ username }) {
+  return (
+    <PostContainer>
+      <H4><Title>No que você está pensando?, @{username}</Title></H4>
 
-            <TextContainer>
-                <Textarea placeholder="Digite sua mensagem" rows="4">
+      <TextContainer>
+        <Textarea placeholder="Digite sua mensagem" rows="4">
 
-                </Textarea>
-            </TextContainer>
+        </Textarea>
+      </TextContainer>
 
-            <BottomContainer>
-                <BottomText>Sua mensagem será pública.</BottomText>
-                <Button>Enviar</Button>
-            </BottomContainer>
-        </PostContainer>
-    )
+      <BottomContainer>
+        <BottomText>Sua mensagem será pública.</BottomText>
+        <Button>Enviar</Button>
+      </BottomContainer>
+    </PostContainer>
+  )
 }
 
 export default CreatePost

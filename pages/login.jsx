@@ -55,7 +55,6 @@ export default function LoginPage() {
 
     }
 
-
     return (
         <ImageWithSpace>
             <H1># Social Dev</H1>
