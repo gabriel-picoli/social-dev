@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import moment from "moment";
+
 const PostContainer = styled.div`
   background-color: ${props => props.theme.white};
   padding: 20px;
@@ -18,13 +20,13 @@ const ContainerText = styled.div`
   margin-top: 20px;
 `
 
-function Post() {
+function Post({ text, user, date }) {
   return (
     <PostContainer>
-      <StyledUsername>@username</StyledUsername>
-      <StyledDate>24 de maio de 2021</StyledDate>
+      <StyledUsername>@{user}</StyledUsername>
+      <StyledDate>{moment(date).format('LLL')}</StyledDate>
       <ContainerText>
-        restos de um moinho que caiu sao como restos de um amor. as ruinas ficam e quando voce olha para elas, lembra da beleza que antes havia ali.. e voce quer de volta
+        {text}
       </ContainerText>
     </PostContainer>
   )

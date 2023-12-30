@@ -11,3 +11,4 @@
 - Instalar Iron-Sessions `npm i iron-session@6.0.5`
 - Instalar Hook Form `npm i react-hook-form@7.27.1 @hookform/resolvers@2.8.8`
 - Instalar Axios `npm i axios@0.26.0`
+- Instalar SWR e Moment `npm i swr@1.2.2 moment@2.29.1`
