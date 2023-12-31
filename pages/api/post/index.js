@@ -4,33 +4,50 @@ import createHandler from "../../../lib/middlewares/nextConnect"
 import validate from "../../../lib/middlewares/validation"
 import { ironConfig } from "../../../lib/middlewares/iron-sessions"
 
-import { createPostSchema } from '../../../modules/post/post.schema'
-import { createPost, getPosts } from '../../../modules/post/post.service'
+import { createPostSchema, deletePostSchema } from '../../../modules/post/post.schema'
+import { createPost, getPosts, deletePost } from '../../../modules/post/post.service'
 
 
 const handler = createHandler()
 
-handler.post(validate({ body: createPostSchema }), async (req, res) => {
-    try {
-        if (!req.session.user) return res.status(401).send()
+handler
+    .post(validate({ body: createPostSchema }), async (req, res) => {
+        try {
+            if (!req.session.user) return res.status(401).send()
 
-        const newPost = await createPost(req.body, req.session.user)
-        res.status(201).send(newPost)
+            const newPost = await createPost(req.body, req.session.user)
+            res.status(201).send(newPost)
 
-    } catch (err) {
-        return res.status(500).send(err.message)
-    }
-}).get(async (req, res) => {
-    try {
-        if (!req.session.user) return res.status(401).send()
+        } catch (err) {
+            return res.status(500).send(err.message)
+        }
+    })
+    .get(async (req, res) => {
+        try {
+            if (!req.session.user) return res.status(401).send()
 
-        const posts = await getPosts()
-        res.status(200).send(posts)
+            const posts = await getPosts()
+            res.status(200).send(posts)
 
-    } catch (err) {
-        return res.status(500).send(err.message)
+        } catch (err) {
+            return res.status(500).send(err.message)
 
-    }
-})
+        }
+    })
+    .delete(validate(deletePostSchema), async (req, res) => {
+        try {
+            if (!req.session.user) return res.status(401).send()
+
+            const deletedPost = await deletePost(req.body.id, req.session.user)
+
+            if (deletePost)
+                return res.status(200).send({ ok: true })
+
+            return res.status(400).send('post not found')
+
+        } catch (err) {
+            return res.status(500).send(err.message)
+        }
+    })
 
 export default withIronSessionApiRoute(handler, ironConfig)

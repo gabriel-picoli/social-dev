@@ -1,7 +1,7 @@
-import postModel from "./post.model";
+import Post from "./post.model";
 
 export const createPost = async (body, user) => {
-    return await postModel.create({
+    return await Post.create({
         text: body.text,
         createDate: new Date(),
         createdBy: user.id
@@ -10,8 +10,15 @@ export const createPost = async (body, user) => {
 }
 
 export const getPosts = async (limit = 10) => {
-    return await postModel.find()
+    return await Post.find()
         .populate('createdBy', 'user')
         .sort({ createDate: -1 })
         .limit(limit)
+}
+
+export const deletePost = async (id, user) => {
+    return await Post.findOneAndDelete({
+        _id: id,
+        createdBy: user.id
+    })
 }
