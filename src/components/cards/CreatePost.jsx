@@ -62,7 +62,7 @@ function CreatePost({ username }) {
 
   return (
     <PostContainer>
-      <H4><Title>No que você está pensando?, @{username}</Title></H4>
+      <H4><Title>No que você está pensando, @{username}?</Title></H4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextContainer>
           <ControlledTextarea placeholder="Digite sua mensagem" rows="4" control={control} name="text" maxlength="256">
