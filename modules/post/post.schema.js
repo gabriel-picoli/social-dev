@@ -15,5 +15,4 @@ export const deletePostSchema = Joi.object({
 export const editPostSchema = Joi.object({
     id: Joi.objectId().required(),
     text: Joi.string().required().max(256)
-
 })

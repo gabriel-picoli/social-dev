@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { joiResolver } from '@hookform/resolvers/joi'
 import axios from 'axios'
 import { useRouter } from "next/router"
+import { useState } from "react"
 
 import { loginSchema } from "../modules/user/user.schema"
 
@@ -35,8 +36,11 @@ export default function LoginPage() {
         resolver: joiResolver(loginSchema)
     })
 
+    const [loading, setLoading] = useState(false) // usando useState
+
     const handleForm = async (data) => {
         try {
+            setLoading(true)
             const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/login`, data)
             if (status === 200) {
                 router.push('/')
@@ -51,6 +55,8 @@ export default function LoginPage() {
                     message: 'Usuário ou email incorretos.'
                 })
             }
+        } finally {
+            setLoading(false)
         }
 
     }
@@ -67,7 +73,7 @@ export default function LoginPage() {
                     <Input type="text" label="Email ou usuário" name="userOrEmail" control={control} />
                     <Input type="password" label="Senha" name="password" control={control} />
 
-                    <Button type="submit" disabled={Object.keys(errors).length}>Entrar</Button>
+                    <Button loading={loading} type="submit" disabled={Object.keys(errors).length}>Entrar</Button>
                 </Form>
 
                 <Text>
