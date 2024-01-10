@@ -52,7 +52,7 @@ function CreatePost({ username }) {
     mode: 'all'
   })
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const onSubmit = async (data) => {
     try {
