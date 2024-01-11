@@ -9,7 +9,7 @@ export const createPost = async (body, user) => {
     )
 }
 
-export const getPosts = async (limit = 10) => {
+export const getPosts = async (limit = 50) => {
     return await Post.find()
         .populate('createdBy', 'user')
         .sort({ createDate: -1 })
