@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
 * {
   padding: 0;
   margin: 0;
-  border-box: box-sizing;
+  box-sizing: border-box;
 }
 
 body {
