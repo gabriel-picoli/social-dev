@@ -63,7 +63,7 @@ export default function LoginPage() {
 
     return (
         <ImageWithSpace>
-            <H1># Social Dev</H1>
+            <H1Twitter Maligno</H1>
             <H4>Tudo que acontece no mundo dev, está aqui!</H4>
 
             <FormContainer>
